@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Ping Pong Scoreboard</title>
+        <style>
+            body{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100;
+                margin:0;
+            }
+            .myclass{
+                border:2px;
+                padding: 10px;
+                border-color: solid black;
+                display: inline-block;
+            }
+            #txt{
+                /* text-align: center; */
+                padding: 10px;
+                border-color: black;
+                font-weight: bold;
+            }
+            .points{
+                text-align: center;
+            }
+            .btn{
+                cursor: pointer;
+            }
+            .txt2{
+                padding-left: 2px;
+                padding-top: 10px;
+                padding-right: 10px;
+            }
+            #player1{
+                border-color: green;
+                background-color: rgb(59, 241, 59);
+                padding: 5px;
+                font-weight: bold;
+            }
+            #player2{
+                border-color: rgb(73, 73, 235);
+                background-color: rgb(81, 81, 236);
+                padding: 5px;
+                font-weight: bold;
+            }
+            #reset{
+                border-color: red;
+                background-color: red;
+                padding: 5px;
+                padding-left: 15px;
+                padding-right: 15px;
+                font-weight: bold;
+            }  
+        </style>
+    </head>
+    <body>
+        <div class="myclass">
+           <div>
+            <img src="ping.PNG">
+           </div>
+                 <div id = "txt">Ping Pong Score Keeper</div>
+               
+                <p>
+                    <span class="points" id = "p1">0</span> to
+                    <span class="points" id = "p2">0</span> 
+                </p>
+                 <div id="txt">Use the button below to keep score</div>
+                 <p>
+                 <span class="txt2" id="pt1">playing to:</span>
+                 <span class="txt2" id="pt2"> 
+                    <input type="number" id="pt" value="0">
+                 </span>
+                 </p>               
+                 
+            <div id = "button">
+                <span class = "btn" id = "player1"> +1 Player 1 </span>
+                <span class = "btn" id = "player2"> +1 Player 2 </span>
+                <span class = "btn" id = "reset"> Reset </span>
+            </div>
+        </div>
+        <script>
+            let p1bt = document.getElementById("player1")
+            let p2bt = document.getElementById("player2")
+            let res = document.getElementById("reset")
+            let point = document.getElementById("pt")
+            let p1s = document.getElementById("p1")
+            let p2s = document.getElementById("p2")
+            let tpoint = 0
+
+            function update(player){
+                if(tpoint === 0){
+                    alert("please enter points")
+                   
+                }
+                
+                if(parseInt(p1s.textContent)>=tpoint || parseInt(p2s.textContent)>=tpoint){
+                    p1bt.disabled = true
+                    p2bt.disabled = true 
+                return;   
+                  }
+                if(player === 1){
+                    let score = parseInt(p1s.textContent)
+                    p1s.textContent = score + 1; 
+                      if (score + 1 === tpoint) {
+                colp1();
+            }
+                }
+                else if(player === 2){
+                    let pscore = parseInt(p2s.textContent)
+                    p2s.textContent = pscore + 1
+                    if (pscore + 1 === tpoint) {
+                colp2();
+            }
+        }
+        
+        else if (player === 0) {
+            p1bt.disabled = false;
+            p2bt.disabled = false;
+        }
+    }
+       function colp1(){
+                
+             p1s.style.color = '#0f0';
+             p2s.style.color = '#f00';
+            
+                             }                     
+                
+         function colp2(){
+                    
+              p1s.style.color = '#f00';
+              p2s.style.color = '#0f0';
+             
+                         }                                     
+            
+
+            p1bt.addEventListener("click", function(){
+                update(1)
+            })
+            p2bt.addEventListener("click",function(){
+                update(2)
+            })
+            res.addEventListener("click",function(){
+              point.value = 0              
+              p1s.textContent = 0
+              p2s.textContent = 0
+              p1s.style.color = '#000'
+              p2s.style.color = "#000"
+              update(0)
+            })      
+            point.addEventListener("change",function(){
+                tpoint =point.value
+                
+                update(0);
+            })   
+        
+        </script>
+    </body>
+</html>
